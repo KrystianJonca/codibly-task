@@ -1,52 +1,41 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ProductsList from './ProductsList';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-
-const dummyData = [
-  {
-    id: 1,
-    name: 'cerulean',
-    year: 2000,
-    color: '#98B2D1',
-    pantone_value: '15-4020',
-  },
-  {
-    id: 2,
-    name: 'fuchsia rose',
-    year: 2001,
-    color: '#C74375',
-    pantone_value: '17-2031',
-  },
-  {
-    id: 3,
-    name: 'true red',
-    year: 2002,
-    color: '#BF1932',
-    pantone_value: '19-1664',
-  },
-  {
-    id: 4,
-    name: 'aqua sky',
-    year: 2003,
-    color: '#7BC4C4',
-    pantone_value: '14-4811',
-  },
-  {
-    id: 5,
-    name: 'tigerlily',
-    year: 2004,
-    color: '#E2583E',
-    pantone_value: '17-1456',
-  },
-];
+import {
+  PaginationContext,
+  PaginationContextType,
+} from '../context/PaginationContext';
 
 const Pagination: React.FC = () => {
+  const {
+    currentPage,
+    totalPageCount,
+    currentProducts,
+    nextPageHandler,
+    prevPageHandler,
+  } = useContext(PaginationContext) as PaginationContextType;
+
   return (
     <div className="w-full">
-      <ProductsList products={dummyData} />
-      <div className="flex justify-between items-center mt-4 w-16">
-        <FaArrowLeft size="24" className="cursor-pointer" />
-        <FaArrowRight size="24" className="cursor-pointer" />
+      <ProductsList products={currentProducts} />
+      <div className="flex justify-between items-center mt-4 w-24">
+        <FaArrowLeft
+          size="24"
+          className={
+            currentPage === 1 ? 'text-gray-200' : 'text-black cursor-pointer'
+          }
+          onClick={prevPageHandler}
+        />
+        <span>{currentPage}</span>
+        <FaArrowRight
+          size="24"
+          className={
+            currentPage === totalPageCount
+              ? 'text-gray-200'
+              : 'text-black cursor-pointer'
+          }
+          onClick={nextPageHandler}
+        />
       </div>
     </div>
   );

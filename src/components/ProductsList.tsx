@@ -22,7 +22,7 @@ const ProductsList: React.FC<IProductsListProps> = ({ products }) => {
           <span>ID. Name</span>
           <span>Year</span>
         </li>
-        {products ? (
+        {products?.length ? (
           products.map((product) => (
             <Product
               key={product.id}
@@ -34,7 +34,7 @@ const ProductsList: React.FC<IProductsListProps> = ({ products }) => {
           ))
         ) : (
           <li className="text-lg m-2 font-bold text-center">
-            No products found :(
+            Product not found :(
           </li>
         )}
       </ul>

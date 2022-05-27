@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import PaginationContextProvider from './context/PaginationContext';
 import App from './App';
 import './index.css';
 
@@ -8,6 +9,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <PaginationContextProvider>
+      <App />
+    </PaginationContextProvider>
   </React.StrictMode>
 );
